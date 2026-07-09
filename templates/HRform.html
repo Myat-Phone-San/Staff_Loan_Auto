@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>HR Loan Approval Form</title>
+
+<style>
+:root{
+    --primary:#0056b3;
+    --secondary:#f4f7f6;
+    --border:#d9d9d9;
+    --success:#28a745;
+    --danger:#dc3545;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Pyidaungsu','Segoe UI',sans-serif;
+    background:var(--secondary);
+    padding:20px;
+}
+
+.container{
+    max-width:1400px;
+    margin:auto;
+    background:#fff;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 4px 15px rgba(0,0,0,.1);
+}
+
+/* Row wrapper placing the logo on the left and the title text centered */
+.logo-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    min-height: 50px;
+}
+
+.logo-area img {
+    height: 45px;
+    width: auto;
+}
+
+.page-title{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color:var(--primary);
+    font-size: 24px;
+    margin: 0;
+    text-align: center;
+}
+
+/* Photo-style Boxed Date Layout Component */
+.photo-date-container {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+.date-boxes-group {
+    display: flex;
+    align-items: center;
+}
+
+.date-box {
+    width: 22px;
+    height: 26px;
+    border: 1px solid #777;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: bold;
+    background: #fff;
+    margin-right: -1px;
+}
+
+.date-separator {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 0 3px;
+    color: #555;
+}
+
+.content-wrapper{
+    display:flex;
+    gap:25px;
+}
+
+.left-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.right-panel {
+    flex: 1;
+}
+
+.section{
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:20px;
+    background:#fff;
+}
+
+.section-title{
+    color:var(--primary);
+    margin-bottom:20px;
+    padding-bottom:10px;
+    border-bottom:1px solid #ddd;
+}
+
+/* Form layouts */
+.form-group{
+    display:flex;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+.form-label{
+    flex:0 0 35%;
+    font-weight:bold;
+    color:#333;
+    padding-right:15px;
+}
+
+.readonly-value{
+    flex:0 0 65%;
+    background:#f8f9fa;
+    border:1px solid #ddd;
+    border-radius:5px;
+    padding:10px;
+    min-height:42px;
+    display:flex;
+    align-items:center;
+    font-size:14px;
+}
+
+.form-control-wrapper{
+    flex:0 0 65%;
+}
+
+.form-input{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    font-size:14px;
+}
+
+.form-input:focus{
+    outline:none;
+    border-color:var(--primary);
+}
+
+textarea.form-input{
+    resize:vertical;
+}
+
+/* Declaration / Confirmation Box Styles */
+.declaration-box{
+    margin-top:25px;
+    padding:20px;
+    border:1px solid #aaa;
+    border-radius:6px;
+    background:#fafafa;
+}
+
+.declaration-title{
+    font-weight:bold;
+    color:var(--primary);
+    font-size:18px;
+    margin-bottom: 15px;
+}
+
+.declaration-list {
+    list-style: none;
+}
+
+.declaration-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.declaration-list li:last-child {
+    margin-bottom: 0;
+}
+
+.declaration-list input[type="checkbox"] {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+/* Action Control Buttons at the Bottom */
+.action-buttons-group {
+    display: flex;
+    gap: 20px;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.action-btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    transition: background 0.2s ease-in-out;
+}
+
+.approve-btn {
+    background: var(--success);
+}
+
+.approve-btn:hover {
+    background: #218838;
+}
+
+.reject-btn {
+    background: var(--danger);
+}
+
+.reject-btn:hover {
+    background: #c82333;
+}
+
+@media(max-width:900px){
+    .logo-area {
+        flex-direction: column;
+        position: static;
+        gap: 10px;
+    }
+
+    .logo-area img {
+        position: static;
+    }
+
+    .page-title {
+        position: static;
+        transform: none;
+    }
+
+    .content-wrapper{
+        flex-direction:column;
+    }
+
+    .form-group{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .form-label{
+        width:100%;
+        margin-bottom:5px;
+    }
+
+    .readonly-value,
+    .form-control-wrapper{
+        width:100%;
+        flex:0 0 100%;
+    }
+    
+    .action-buttons-group {
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Header setup -->
+    <div class="logo-area">
+        <img src="https://www.cbbank.com.mm/sites/cbbank.com.mm/files/logo.png" alt="CB BANK">
+        <h2 class="page-title">HR Loan Approval Form</h2>
+        
+        <!-- Boxed Date Component -->
+        <div class="photo-date-container">
+            <span>နေ့စွဲ ➔ DD/MM/YYYY</span>
+            <div class="date-boxes-group">
+                <span class="date-box" id="d1">-</span>
+                <span class="date-box" id="d2">-</span>
+                <span class="date-separator">/</span>
+                <span class="date-box" id="m1">-</span>
+                <span class="date-box" id="m2">-</span>
+                <span class="date-separator">/</span>
+                <span class="date-box" id="y1">-</span>
+                <span class="date-box" id="y2">-</span>
+                <span class="date-box" id="y3">-</span>
+                <span class="date-box" id="y4">-</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-wrapper">
+
+        <!-- LEFT PANEL: Displays all readonly historical details information -->
+        <div class="left-panel">
+            
+            <!-- Staff Details Section -->
+            <div class="section">
+                <h3 class="section-title">Staff Details Information</h3>
+
+                <div class="form-group">
+                    <div class="form-label">ဝန်ထမ်း ID အမှတ်</div>
+                    <div class="readonly-value">CB-1006</div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">အမည်</div>
+                    <div class="readonly-value">Ei Ei Maw</div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">ရာထူး</div>
+                    <div class="readonly-value">Assistant Manager</div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">Department / Division</div>
+                    <div class="readonly-value">Risk Management Division</div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">မှတ်ပုံတင်အမှတ်</div>
+                    <div class="readonly-value">၅/စကန(နိုင်)၂၂၇၇၈၃</div>
+                </div>
+
+                 <div class="form-group">
+                    <div class="form-label">အဖအမည်</div>
+                    <div class="readonly-value">U Hla</div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">အဖ မှတ်ပုံတင်အမှတ်</div>
+                    <div class="readonly-value">၅/စကန(နိုင်)၂၁၁၁၁၁</div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">အမြဲတမ်းနေရပ်လိပ်စာ</div>
+                    <div class="readonly-value">No.123, Kamayut Township, Yangon</div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">ဖုန်းနံပါတ်</div>
+                    <div class="readonly-value">09-123456789</div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">စုစုပေါင်းလစာ</div>
+                    <div class="readonly-value">620,000 MMK</div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">ချေးငွေအမျိုးအစား</div>
+                    <div class="readonly-value">ဝန်ထမ်းချေးငွေ</div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">ချေးလိုသောငွေပမာဏ</div>
+                    <div class="readonly-value">1,240,000 MMK</div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">လစာဝင်ငွေအဆ</div>
+                    <div class="readonly-value">2 ဆ</div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">CB BANK Account No.</div>
+                    <div class="readonly-value">001060050043223</div>
+                </div>
+            </div>
+
+            <!-- Guarantor 1 Section -->
+            <div class="section">
+                <h3 class="section-title">Guarantor 1 Details Information</h3>
+
+                <div class="form-group">
+                    <div class="form-label">အာမခံသူ(၁) ဝန်ထမ်း ID</div>
+                    <div class="readonly-value">CB-2001</div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">အမည်</div>
+                    <div class="readonly-value">U Kyaw Kyaw</div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">ရာထူး</div>
+                    <div class="readonly-value">Manager</div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">မှတ်ပုံတင်အမှတ်</div>
+                    <div class="readonly-value">၁၂/လမန(နိုင်)၁၁၂၂၃၃</div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">ဌာန / ဘဏ်ခွဲအမည်</div>
+                    <div class="readonly-value">Finance Division</div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">Action Status</div>
+                    <div class="readonly-value" style="color: var(--success); font-weight: bold;">Approved</div>
+                </div>
+            </div>
+
+            <!-- Guarantor 2 Section -->
+            <div class="section">
+                <h3 class="section-title">Guarantor 2 Details Information</h3>
+
+                <div class="form-group">
+                    <div class="form-label">အာမခံသူ(၂) ဝန်ထမ်း ID</div>
+                    <div class="readonly-value">CB-3045</div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">အမည်</div>
+                    <div class="readonly-value">Daw Hla Hla</div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">ရာထူး</div>
+                    <div class="readonly-value">Senior Officer</div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">မှတ်ပုံတင်အမှတ်</div>
+                    <div class="readonly-value">၁၄/လပတ(နိုင်)၄၄၅၅၆၆</div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">ဌာန / ဘဏ်ခွဲအမည်</div>
+                    <div class="readonly-value">Operations Division</div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">Action Status</div>
+                    <div class="readonly-value" style="color: var(--success); font-weight: bold;">Approved</div>
+                </div>
+            </div>
+
+            <!-- HOD Approval Info Section -->
+            <div class="section">
+                <h3 class="section-title">Head of Department Approval Details</h3>
+
+                <div class="form-group">
+                    <div class="form-label">HOD အမည်</div>
+                    <div class="readonly-value">U Ba</div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">HOD ရာထူး</div>
+                    <div class="readonly-value">Head of Department</div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">Department</div>
+                    <div class="readonly-value">Risk Management Division</div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">HOD မှတ်ချက်</div>
+                    <div class="readonly-value">ဝန်ထမ်းစွမ်းဆောင်ရည် ကောင်းမွန်ပြီး စည်းကမ်းလိုက်နာသဖြင့် စိစစ်ထောက်ခံပါသည်။</div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">Action Status</div>
+                    <div class="readonly-value" style="color: var(--success); font-weight: bold;">Approved</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- RIGHT PANEL: Interactive HR Verification Input Form -->
+        <div class="right-panel">
+            <div class="section">
+                <h3 class="section-title">HR Details Information</h3>
+
+                <form id="hrForm">
+
+                    <div class="form-group">
+                        <label class="form-label">HR အမည်</label>
+                        <div class="form-control-wrapper">
+                            <input type="text" id="hrName" class="form-input" placeholder="HR အမည်ထည့်ပါ" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">HR Department</label>
+                        <div class="form-control-wrapper">
+                            <select id="hrDepartment" class="form-input" required>
+                                <option value="">-- Department ရွေးချယ်ပါ --</option>
+                                <option>Human Resources Division</option>
+                                <option>HR Operations</option>
+                                <option>Talent Management</option>
+                                <option>Employee Relations</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Remarks</label>
+                        <div class="form-control-wrapper">
+                            <textarea id="hrRemarks" class="form-input" rows="6" placeholder="မှတ်ချက်များ ရေးသားရန်" required></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Checklist Box -->
+                    <div class="declaration-box">
+                        <div class="declaration-title">HR Confirmation</div>
+                        <ul class="declaration-list">
+                            <li>
+                                <input type="checkbox" id="checkStaff">
+                                <label for="checkStaff">Staff Information ကို စစ်ဆေးပြီးဖြစ်ပါသည်။</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="checkGuarantor">
+                                <label for="checkGuarantor">Guarantor Information ကို စစ်ဆေးပြီးဖြစ်ပါသည်။</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="checkHOD">
+                                <label for="checkHOD">HOD Approval Information ကို စစ်ဆေးပြီးဖြစ်ပါသည်။</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="checkConfirm">
+                                <label for="checkConfirm">အထက်ပါဆုံးဖြတ်ချက်အား HR မှ အတည်ပြုပါသည်။</label>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Action Control Buttons -->
+                    <div class="action-buttons-group">
+                        <button type="submit" class="action-btn approve-btn" data-decision="Approved">Approve</button>
+                        <button type="submit" class="action-btn reject-btn" data-decision="Rejected">Reject</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+// Extract and place current system date numbers into specific grid layout positions
+(function initializeDynamicDateBlocks() {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const yyyy = String(today.getFullYear());
+
+    document.getElementById('d1').textContent = dd[0];
+    document.getElementById('d2').textContent = dd[1];
+    document.getElementById('m1').textContent = mm[0];
+    document.getElementById('m2').textContent = mm[1];
+    document.getElementById('y1').textContent = yyyy[0];
+    document.getElementById('y2').textContent = yyyy[1];
+    document.getElementById('y3').textContent = yyyy[2];
+    document.getElementById('y4').textContent = yyyy[3];
+})();
+
+let activeAction = "";
+const checkboxes = document.querySelectorAll('.declaration-list input[type="checkbox"]');
+
+// Capture dynamic form intents based on manual interaction triggers (Approve / Reject triggers)
+document.querySelectorAll(".action-btn").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+        activeAction = this.getAttribute("data-decision");
+        
+        // Dynamically enforce checkbox requirements based on action type
+        if (activeAction === "Approved") {
+            checkboxes.forEach(cb => cb.required = true);
+        } else {
+            checkboxes.forEach(cb => cb.required = false);
+        }
+    });
+});
+
+// Structural handling of transactional form metadata processing
+document.getElementById("hrForm").addEventListener("submit", async function(event){
+    event.preventDefault();
+
+    // Prepare the data object
+    const formData = {
+        hrName: document.getElementById("hrName").value,
+        hrDepartment: document.getElementById("hrDepartment").value,
+        hrRemarks: document.getElementById("hrRemarks").value,
+        actionDecision: activeAction 
+    };
+
+
+    const applicationId = Number(window.localStorage.getItem("staffLoanApplicationId"));
+    if (!applicationId) {
+        alert("Please complete the staff loan form first so the application ID is available.");
+        return;
+    }
+
+    const submissionPayload = {
+        ...formData,
+        applicationId,
+        declarationAgreed: Array.from(checkboxes).every(cb => cb.checked),
+        approvalStatus: activeAction === "Approved" ? "APPROVED" : "REJECTED"
+    };
+    const powerAutomateUrl = "https://fee5717819c7ee39be9bafcfc086ab.94.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/23/workflows/a84dc8666f5f428aa9b05397d8149e54/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=92EzlftZUwhzh9EhmZP6uWNyJldcY2U7eoc5KqUWhS8";
+
+    try {
+        let flowOk = false;
+
+        if (powerAutomateUrl) {
+            try {
+                const flowResponse = await fetch(powerAutomateUrl, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(submissionPayload)
+                });
+                flowOk = flowResponse.ok;
+            } catch (flowError) {
+                console.warn("Power Automate flow warning:", flowError);
+            }
+        }
+
+        try {
+            const dbResponse = await fetch("/api/submit-hr", {
+                method: "POST",
+                headers: { 
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(submissionPayload)
+            });
+            await dbResponse.json().catch(() => ({}));
+        } catch (dbError) {
+            console.warn("Database save warning:", dbError);
+        }
+
+        if (flowOk) {
+            alert("HR review has been sent to Power Automate and the DB save was attempted afterward.");
+        } else {
+            alert("Power Automate flow could not be reached, but the form data was still sent to the local backend.");
+        }
+    } catch (error) {
+        console.error("HR submission error:", error);
+        alert("An error occurred during HR submission.");
+    }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Guarantor Approval Form</title>
+
+<style>
+:root{
+    --primary:#0056b3;
+    --secondary:#f4f7f6;
+    --border:#d9d9d9;
+    --success:#28a745;
+    --danger:#dc3545;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Pyidaungsu','Segoe UI',sans-serif;
+    background:var(--secondary);
+    padding:20px;
+}
+
+.container{
+    max-width:1400px;
+    margin:auto;
+    background:#fff;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 4px 15px rgba(0,0,0,.1);
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    min-height: 65px;
+}
+
+.logo-area img {
+    height: 45px;
+    width: auto;
+}
+
+.page-title{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color:var(--primary);
+    font-size: 24px;
+    margin: 0;
+    text-align: center;
+}
+
+.photo-date-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+.date-boxes-group {
+    display: flex;
+    align-items: center;
+}
+
+.date-box {
+    width: 22px;
+    height: 26px;
+    border: 1px solid #777;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: bold;
+    background: #fff;
+    margin-right: -1px;
+}
+
+.date-separator {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 0 4px;
+    color: #555;
+}
+
+.content-wrapper{
+    display:flex;
+    gap:25px;
+}
+
+.section{
+    flex:1;
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:20px;
+    background:#fff;
+}
+
+.section-title{
+    color:var(--primary);
+    margin-bottom:20px;
+    padding-bottom:10px;
+    border-bottom:1px solid #ddd;
+}
+
+.form-group{
+    display:flex;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+.form-label{
+    flex:0 0 35%;
+    font-weight:bold;
+    color:#333;
+    padding-right:15px;
+}
+
+.readonly-value{
+    flex:0 0 65%;
+    background:#f8f9fa;
+    border:1px solid #ddd;
+    border-radius:5px;
+    padding:10px;
+    min-height:42px;
+    display:flex;
+    align-items:center;
+}
+
+.form-control-wrapper{
+    flex:0 0 65%;
+}
+
+.form-input{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    font-size:14px;
+}
+
+.form-input:focus{
+    outline:none;
+    border-color:var(--primary);
+}
+
+textarea.form-input{
+    resize:vertical;
+}
+
+.declaration-box{
+    margin-top:25px;
+    padding:20px;
+    border:1px solid #aaa;
+    border-radius:6px;
+    background:#fafafa;
+}
+
+.declaration-title{
+    font-weight:bold;
+    color:var(--primary);
+    font-size:18px;
+    margin-bottom: 10px;
+}
+
+.declaration-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.declaration-text{
+    line-height:2;
+    text-align: justify;
+}
+
+.declaration-item input[type="checkbox"] {
+    transform: scale(1.3);
+    margin-top: 6px;
+    cursor: pointer;
+}
+
+.action-buttons-group {
+    display: flex;
+    gap: 20px;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.action-btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    transition: background 0.2s ease-in-out;
+}
+
+.approve-btn {
+    background: var(--success);
+}
+
+.approve-btn:hover {
+    background: #218838;
+}
+
+.reject-btn {
+    background: var(--danger);
+}
+
+.reject-btn:hover {
+    background: #c82333;
+}
+
+.action-btn:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+}
+
+@media(max-width:900px){
+    .logo-area {
+        flex-direction: column;
+        position: static;
+        gap: 15px;
+    }
+
+    .page-title {
+        position: static;
+        transform: none;
+    }
+
+    .content-wrapper{
+        flex-direction:column;
+    }
+
+    .form-group{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .form-label{
+        width:100%;
+        margin-bottom:5px;
+    }
+
+    .readonly-value,
+    .form-control-wrapper{
+        width:100%;
+        flex:0 0 100%;
+    }
+    
+    .declaration-item {
+        align-items: flex-start;
+    }
+    
+    .action-buttons-group {
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo-area">
+        <img src="https://www.cbbank.com.mm/sites/cbbank.com.mm/files/logo.png" alt="CB BANK">
+        <h2 class="page-title">Guarantor Approval Form</h2>
+        
+        <div class="photo-date-container">
+            <span>နေ့စွဲ ➔ DD/MM/YYYY &nbsp;</span>
+            <div class="date-boxes-group">
+                <span class="date-box" id="d1">-</span>
+                <span class="date-box" id="d2">-</span>
+                <span class="date-separator">/</span>
+                <span class="date-box" id="m1">-</span>
+                <span class="date-box" id="m2">-</span>
+                <span class="date-separator">/</span>
+                <span class="date-box" id="y1">-</span>
+                <span class="date-box" id="y2">-</span>
+                <span class="date-box" id="y3">-</span>
+                <span class="date-box" id="y4">-</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-wrapper">
+
+        <!-- LEFT SIDE: Prefilled Staff Details Information (Ignored by JSON Submit) -->
+        <div class="section">
+            <h3 class="section-title">Staff Details Information</h3>
+
+            <div class="form-group">
+                <div class="form-label">ဝန်ထမ်း ID အမှတ်</div>
+                <div class="readonly-value">CB-1006</div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-label">အမည်</div>
+                <div class="readonly-value">Ei Ei Maw</div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-label">ရာထူး</div>
+                <div class="readonly-value">Assistant Manager</div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-label">Department / Division</div>
+                <div class="readonly-value">Risk Management Division</div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-label">မှတ်ပုံတင်အမှတ်</div>
+                <div class="readonly-value">၅/စကန(နိုင်)၂၂၇၇၈၃</div>
+            </div>
+
+             <div class="form-group">
+                <div class="form-label">အဖအမည်</div>
+                <div class="readonly-value">U Hla</div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-label">အဖ မှတ်ပုံတင်အမှတ်</div>
+                <div class="readonly-value">၅/စကန(နိုင်)၂၁၁၁၁၁</div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-label">အမြဲတမ်းနေရပ်လိပ်စာ</div>
+                <div class="readonly-value">No.123, Kamayut Township, Yangon</div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-label">ဖုန်းနံပါတ်</div>
+                <div class="readonly-value">09-123456789</div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-label">စုစုပေါင်းလစာ</div>
+                <div class="readonly-value">620,000 MMK</div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-label">ချေးငွေအမျိုးအစား</div>
+                <div class="readonly-value">ဝန်ထမ်းချေးငွေ</div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-label">ချေးလိုသောငွေပမာဏ</div>
+                <div class="readonly-value">1,240,000 MMK</div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-label">လစာဝင်ငွေအဆ</div>
+                <div class="readonly-value">2 ဆ</div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-label">CB BANK Account No.</div>
+                <div class="readonly-value">001060050043223</div>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE: Guarantor Input Form (Captured into JSON Payload) -->
+        <div class="section">
+            <h3 class="section-title">Guarantor Details Information</h3>
+
+            <form id="guarantorForm">
+
+                <div class="form-group">
+                    <label class="form-label">အာမခံသူဝန်ထမ်း ID အမှတ်</label>
+                    <div class="form-control-wrapper">
+                        <input type="text" id="guarantorId" class="form-input" placeholder="CB-2001" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">အမည်</label>
+                    <div class="form-control-wrapper">
+                        <input type="text" id="guarantorName" class="form-input" placeholder="Mg Mg" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">ရာထူး</label>
+                    <div class="form-control-wrapper">
+                        <select id="guarantorPosition" class="form-input" required>
+                            <option value="">-- ရာထူးရွေးချယ်ပါ --</option>
+                            <option>Assistant</option>
+                            <option>Senior Assistant</option>
+                            <option>Officer</option>
+                            <option>Senior Officer</option>
+                            <option>Assistant Manager</option>
+                            <option>Manager</option>
+                            <option>Senior Manager</option>
+                            <option>Deputy General Manager</option>
+                            <option>General Manager</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">မှတ်ပုံတင်အမှတ်</label>
+                    <div class="form-control-wrapper">
+                        <input type="text" id="guarantorNrc" class="form-input" placeholder="၁၂/ဗဟန(နိုင်)၁၂၃၄၅၆" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">ဖခင်အမည်</label>
+                    <div class="form-control-wrapper">
+                        <input type="text" id="guarantorFather" class="form-input" placeholder="U Ba" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">ဌာန / ဘဏ်ခွဲအမည်</label>
+                    <div class="form-control-wrapper">
+                        <select id="guarantorDepartment" class="form-input" required>
+                            <option value="">-- ဌာနရွေးချယ်ပါ --</option>
+                            <option>HR Division</option>
+                            <option>Risk Management Division</option>
+                            <option>Finance Division</option>
+                            <option>IT Division</option>
+                            <option>Operations Division</option>
+                            <option>Credit Division</option>
+                            <option>Compliance Division</option>
+                            <option>Internal Audit Division</option>
+                            <option>Branch Operation</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">အမြဲတမ်းနေရပ်လိပ်စာ</label>
+                    <div class="form-control-wrapper">
+                        <textarea id="guarantorAddress" class="form-input" rows="4" placeholder="နေရပ်လိပ်စာ ဖြည့်ပါ" required></textarea>
+                    </div>
+                </div>
+
+                <div class="declaration-box">
+                    <div class="declaration-title">ဝန်ခံကတိပြုချက်</div>
+                    
+                    <div class="declaration-item">
+                         <input type="checkbox" id="declarationCheck" required>
+                        <p class="declaration-text">
+                            အထက်ပါ ဝန်ထမ်း၏ ဝန်ထမ်းချေးငွေလျှောက်ထားမှုအပေါ် ကျွန်တော်/ကျွန်မက အာမခံအပ်ပါသည်။ အထက်ပါ ဝန်ထမ်း၏ ဝန်ထမ်းချေးငွေကို အကြောင်းတစ်စုံတစ်ရာကြောင့် မပေးဆပ်နိုင်ပါက (သို့မဟုတ်) ပေးဆပ်ရန် ပျက်ကွက်ပါက ကျန်ရှိနေသော ငွေပမာဏအပေါ် ငွေချေးယူသူ၏ကိုယ်စား အာမခံသူဖြစ်သည့် ကျွန်တော်/ကျွန်မက တစ်ဦးချင်းဖြစ်စေ၊ ပူးတွဲလျက်ဖြစ်စေ အပြေအကြေဖြစ်သည်အထိ ကျွန်တော်/ကျွန်မ၏ လစာငွေမှ တာဝန်ယူပေးဆပ်မည်ဖြစ်ကြောင်း ဝန်ခံကတိပြုပါသည်။
+                        </p>
+                    </div>
+                </div>
+
+                <div class="action-buttons-group">
+                    <button type="submit" class="action-btn approve-btn" data-decision="Approve">Approve</button>
+                    <button type="submit" class="action-btn reject-btn" data-decision="Reject">Reject</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<script>
+(function updateFormDateBoxes() {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const yyyy = String(today.getFullYear());
+
+    document.getElementById('d1').textContent = dd[0];
+    document.getElementById('d2').textContent = dd[1];
+    document.getElementById('m1').textContent = mm[0];
+    document.getElementById('m2').textContent = mm[1];
+    document.getElementById('y1').textContent = yyyy[0];
+    document.getElementById('y2').textContent = yyyy[1];
+    document.getElementById('y3').textContent = yyyy[2];
+    document.getElementById('y4').textContent = yyyy[3];
+})();
+
+let activeAction = "";
+
+document.querySelectorAll(".action-btn").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+        activeAction = this.getAttribute("data-decision");
+    });
+});
+
+document.getElementById("guarantorForm").addEventListener("submit", async function(event){
+    event.preventDefault();
+
+    const declarationCheck = document.getElementById("declarationCheck").checked;
+    if (activeAction === "Approve" && !declarationCheck) {
+        alert("ဝန်ခံကတိပြုချက်ကို အမှန်ခြစ်ပေးရန် လိုအပ်ပါသည်။");
+        return;
+    }
+
+    const buttons = document.querySelectorAll(".action-btn");
+    buttons.forEach(btn => btn.disabled = true);
+
+    // Optimized Payload focusing purely on the input fields and form actions
+    const payload = {
+        guarantorId: document.getElementById("guarantorId").value,
+        guarantorName: document.getElementById("guarantorName").value,
+        guarantorPosition: document.getElementById("guarantorPosition").value,
+        guarantorNrc: document.getElementById("guarantorNrc").value,
+        guarantorFatherName: document.getElementById("guarantorFather").value,
+        guarantorDepartment: document.getElementById("guarantorDepartment").value,
+        guarantorAddress: document.getElementById("guarantorAddress").value,
+        actionStatus: activeAction,
+        decisionDate: `${document.getElementById('d1').textContent}${document.getElementById('d2').textContent}/${document.getElementById('m1').textContent}${document.getElementById('m2').textContent}/${document.getElementById('y1').textContent}${document.getElementById('y2').textContent}${document.getElementById('y3').textContent}${document.getElementById('y4').textContent}`
+    };
+
+    const applicationId = Number(window.localStorage.getItem("staffLoanApplicationId"));
+    if (!applicationId) {
+        alert("Please complete the staff loan form first so the application ID is available.");
+        buttons.forEach(btn => btn.disabled = false);
+        return;
+    }
+
+    const submissionPayload = { ...payload, applicationId };
+    const powerAutomateUrl = "https://fee5717819c7ee39be9bafcfc086ab.94.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/07/workflows/53108f585efd4f0e890431937a1b03cd/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=a4zIYEPxw6RNQbRG2hhTScGLQFT983asL4RQXimCsH0";
+
+    try {
+        let flowOk = false;
+
+        if (powerAutomateUrl) {
+            try {
+                const flowResponse = await fetch(powerAutomateUrl, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(submissionPayload)
+                });
+                flowOk = flowResponse.ok;
+            } catch (flowError) {
+                console.warn("Power Automate flow warning:", flowError);
+            }
+        }
+
+        try {
+            const dbResponse = await fetch("/api/submit-guarantor/1", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(submissionPayload)
+            });
+            await dbResponse.json().catch(() => ({}));
+        } catch (dbError) {
+            console.warn("Database save warning:", dbError);
+        }
+
+        if (flowOk) {
+            alert(`Guarantor response handled with decision: ${activeAction}\nPower Automate flow started successfully and DB save was attempted afterward.`);
+        } else {
+            alert("Power Automate flow could not be reached, but the form data was still sent to the local backend.");
+        }
+
+        document.getElementById("guarantorForm").reset();
+    } catch (error) {
+        console.error("Guarantor submission error: ", error);
+        alert("Unable to process the guarantor form. Check your configuration.");
+    } finally {
+        buttons.forEach(btn => btn.disabled = false);
+    }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ဝန်ထမ်းချေးငွေလျှောက်လွှာ</title>
+
+<style>
+:root{
+    --primary:#0056b3;
+    --bg:#f4f7f6;
+    --border:#d0d0d0;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    padding:20px;
+    background:var(--bg);
+    font-family:'Pyidaungsu','Segoe UI',sans-serif;
+    display:flex;
+    justify-content:center;
+}
+
+.form-container{
+    width:100%;
+    max-width:850px;
+    background:#fff;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.1);
+}
+
+.brand-header {
+    background-color: #ffffff;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid var(--accent-color);
+}
+
+.logo-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    min-height: 60px;
+    padding-bottom: 10px;
+    margin-bottom: 0;
+}
+
+.logo-area img {
+    height: 50px;
+    width: auto;
+    display: block;
+}
+
+.header-right {
+    text-align: right;
+}
+
+.header-right h2 {
+    margin: 0 0 8px 0;
+    color: var(--primary);
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.date-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #333;
+}
+
+.date-box {
+    display: inline-block;
+    width: 20px;
+    height: 22px;
+    border: 1px solid #0056b3;
+    text-align: center;
+    line-height: 20px;
+    font-size: 13px;
+    background: #fff;
+    color: #333;
+}
+
+.date-separator {
+    margin: 0 2px;
+    color: #0056b3;
+}
+
+.info-blue-bar {
+    background-color: #1a5296;
+    color: #ffffff;
+    padding: 8px 15px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 30px;
+    border-radius: 2px;
+}
+
+.form-title-badge {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 0.95em;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+h2{
+    margin: 0;
+    color:var(--primary);
+    font-size: 24px;
+    text-align: center;
+}
+
+.form-group{
+    display:flex;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+.form-label{
+    width:35%;
+    font-weight:bold;
+    color:#333;
+    padding-right:15px;
+}
+
+.form-input,
+.form-select{
+    width:65%;
+    padding:10px;
+    border:1px solid var(--border);
+    border-radius:5px;
+    font-size:14px;
+}
+
+.form-input:focus,
+.form-select:focus{
+    outline:none;
+    border-color:var(--primary);
+}
+
+.option-group{
+    width:65%;
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+.option-group label{
+    cursor:pointer;
+}
+
+.declaration-box{
+    margin-top:30px;
+    padding:20px;
+    border:1px solid #aaa;
+    border-radius:6px;
+    background:#fafafa;
+}
+
+.declaration-title{
+    font-weight:bold;
+    color:var(--primary);
+    font-size:18px;
+    margin-bottom: 10px;
+}
+
+.declaration-text{
+    line-height:2.2;
+    padding-left:20px;
+    margin: 0;
+}
+
+.declaration-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 8px;
+}
+
+.declaration-item input[type="checkbox"] {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.radio-group{
+    margin-top:20px;
+    display:flex;
+    justify-content:center;
+    gap:40px;
+}
+
+.submit-btn{
+    width:100%;
+    margin-top:20px;
+    padding:12px;
+    background:var(--primary);
+    color:#fff;
+    border:none;
+    border-radius:5px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.submit-btn:hover{
+    background:#00408a;
+}
+
+@media(max-width:768px){
+    .logo-area {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .header-right {
+        text-align: center;
+    }
+
+    .date-container {
+        justify-content: center;
+    }
+
+    .form-group{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .form-label,
+    .form-input,
+    .form-select,
+    .option-group{
+        width:100%;
+    }
+
+    .form-label{
+        margin-bottom:5px;
+    }
+
+    .radio-group{
+        flex-direction:column;
+        gap:10px;
+    }
+    
+    .declaration-item {
+        align-items: flex-start;
+    }
+    
+    .declaration-item input[type="checkbox"] {
+        margin-top: 8px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="form-container">
+
+<form id="loanForm">
+    
+    <div class="logo-area">
+        <img src="https://www.cbbank.com.mm/sites/cbbank.com.mm/files/logo.png" alt="CB BANK" class="logo-img">
+        <div class="header-right">
+            <h2>ဝန်ထမ်းချေးငွေလျှောက်လွှာ</h2>
+            <div class="date-container">
+                <span>နေ့စွဲ ➔ DD/MM/YYYY &nbsp;</span>
+                <span class="date-box" id="d1">-</span><span class="date-box" id="d2">-</span>
+                <span class="date-separator">/</span>
+                <span class="date-box" id="m1">-</span><span class="date-box" id="m2">-</span>
+                <span class="date-separator">/</span>
+                <span class="date-box" id="y1">-</span><span class="date-box" id="y2">-</span><span class="date-box" id="y3">-</span><span class="date-box" id="y4">-</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-blue-bar">
+        အချက်အလက်များ ပြည့်စုံစွာဖြည့်ပါ။
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">ဝန်ထမ်း ID အမှတ်</label>
+        <input type="text" id="staffId" class="form-input" placeholder="CB-1006" required>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">အမည်</label>
+        <input type="text" id="staffName" class="form-input" placeholder="Ei Ei Maw" required>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">ဝန်ထမ်း Email</label>
+        <input type="email" id="staffEmail" class="form-input" placeholder="example@cbbank.com.mm" required>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">ရာထူး</label>
+        <select id="staffPosition" class="form-select" required>
+            <option value="">-- ရာထူးရွေးချယ်ပါ --</option>
+            <option>Assistant</option>
+            <option>Senior Assistant</option>
+            <option>Officer</option>
+            <option>Senior Officer</option>
+            <option>Assistant Manager</option>
+            <option>Manager</option>
+            <option>Senior Manager</option>
+            <option>Deputy General Manager</option>
+            <option>General Manager</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Department / Division</label>
+        <select id="department" class="form-select" required>
+            <option value="">-- Department ရွေးချယ်ပါ --</option>
+            <option>Risk Management Division</option>
+            <option>Credit Division</option>
+            <option>HR Division</option>
+            <option>Finance Division</option>
+            <option>IT Division</option>
+            <option>Operations Division</option>
+            <option>Compliance Division</option>
+            <option>Internal Audit Division</option>
+            <option>Treasury Division</option>
+            <option>Branch Operation</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">မှတ်ပုံတင်အမှတ်</label>
+        <input type="text" id="nrc" class="form-input" required>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">အဖအမည်</label>
+        <input type="text" id="fatherName" class="form-input" required>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">အဖ မှတ်ပုံတင်</label>
+        <input type="text" id="fatherNRC" class="form-input" required>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">အမြဲတမ်းနေရပ်လိပ်စာ</label>
+        <input type="text" id="address" class="form-input" placeholder="Full Address -- State,Township,Town,Qr,Street,No." required>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">ဖုန်းနံပါတ်</label>
+        <input type="tel" id="phone" class="form-input" placeholder="+95912345678" pattern="^\+[1-9]\d{1,14}$" title="နိုင်ငံတကာဖုန်းနံပါတ်ပုံစံ ထည့်သွင်းပါ (ဥပမာ - +959...)" required>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">စုစုပေါင်းလစာ</label>
+        <input type="number" id="salary" class="form-input" placeholder="" required>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">ချေးငွေအမျိုးအစား</label>
+        <div class="option-group">
+            <label>
+                <input type="radio" name="loanType" value="Staff Loan" checked> ဝန်ထမ်းချေးငွေ
+            </label>
+            <label>
+                <input type="radio" name="loanType" value="Other"> အခြား
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">ချေးလိုသောငွေပမာဏ</label>
+        <input type="number" id="loanAmount" class="form-input" required>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">လစာဝင်ငွေ အဆ</label>
+        <div class="option-group">
+            <label><input type="radio" name="salaryMultiple" value="1x" checked> ၁ ဆ</label>
+            <label><input type="radio" name="salaryMultiple" value="2x"> ၂ ဆ</label>
+            <label><input type="radio" name="salaryMultiple" value="3x"> ၃ ဆ</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">CB BANK Account No.</label>
+        <input type="text" id="accountNo" class="form-input" required>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">အာမခံသူ(၁)အမည်</label>
+        <input type="text" id="guarantor1Name" class="form-input" required>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">အာမခံသူ(၁) Email</label>
+        <input type="email" id="guarantor1Email" class="form-input" placeholder="example@cbbank.com.mm" required>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">အာမခံသူ(၁) ရာထူး</label>
+        <select id="guarantor1Position" class="form-select" required>
+            <option value="">-- ရာထူးရွေးချယ်ပါ --</option>
+            <option>Assistant</option>
+            <option>Senior Assistant</option>
+            <option>Officer</option>
+            <option>Senior Officer</option>
+            <option>Assistant Manager</option>
+            <option>Manager</option>
+            <option>Senior Manager</option>
+            <option>Deputy General Manager</option>
+            <option>General Manager</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">အာမခံသူ(၂)အမည်</label>
+        <input type="text" id="guarantor2Name" class="form-input" required>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">အာမခံသူ(၂) Email</label>
+        <input type="email" id="guarantor2Email" class="form-input" placeholder="example@cbbank.com.mm" required>
+    </div>
+    
+    <div class="form-group">
+        <label class="form-label">အာမခံသူ(၂) ရာထူး</label>
+        <select id="guarantor2Position" class="form-select" required>
+            <option value="">-- ရာထူးရွေးချယ်ပါ --</option>
+            <option>Assistant</option>
+            <option>Senior Assistant</option>
+            <option>Officer</option>
+            <option>Senior Officer</option>
+            <option>Assistant Manager</option>
+            <option>Manager</option>
+            <option>Senior Manager</option>
+            <option>Deputy General Manager</option>
+            <option>General Manager</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">HOD အမည်</label>
+        <input type="text" id="hodName" class="form-input" required>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">HOD Email</label>
+        <input type="email" id="hodEmail" class="form-input" placeholder="hod@cbbank.com.mm" required>
+    </div>
+    
+    <div class="declaration-box">
+        <div class="declaration-title">ဝန်ခံကတိပြုချက်</div>
+        <ol class="declaration-text">
+            <li class="declaration-item">
+                <span>1.အထက်ဖော်ပြပါ အချက်အလက်များ မှန်ကန်ပါသည်။</span>
+                <input type="checkbox" class="dec-check" required>
+            </li>
+            <li class="declaration-item">
+                <span>2.ဖော်ပြပါ ချေးငွေပမာဏအား ချေးယူခွင့်ပြုပါရန် လျှောက်ထားပါသည်။</span>
+                <input type="checkbox" class="dec-check" required>
+            </li>
+            <li class="declaration-item">
+                <span>3. လစဉ် အရစ်ကျ အရင်းနှင့်အတိုးငွေကို လစာမှ ဖြတ်တောက်ပေးသွင်းရန် သဘောတူပါသည်။</span>
+                <input type="checkbox" class="dec-check" required>
+            </li>
+            <li class="declaration-item">
+                <span>4. CB BANK တွင် တာဝန်မထမ်းဆောင်တော့ပါက ကျန်ရှိငွေကို တစ်ကြိမ်တည်း ပေးသွင်းမည်ဖြစ်ကြောင်း ကတိပြုပါသည်။</span>
+                <input type="checkbox" class="dec-check" required>
+            </li>
+        </ol>
+    </div>
+
+    <div class="radio-group">
+        <label>
+            <input type="radio" name="agreement" value="agree" required> သဘောတူပါသည်
+        </label>
+        <label>
+            <input type="radio" name="agreement" value="disagree"> သဘောမတူပါ
+        </label>
+    </div>
+
+    <button type="submit" class="submit-btn">Submit</button>
+</form>
+
+</div>
+
+<script>
+function setCurrentDate() {
+    const now = new Date();
+    const dd = String(now.getDate()).padStart(2, '0');
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+    const yyyy = String(now.getFullYear());
+
+    document.getElementById('d1').innerText = dd[0];
+    document.getElementById('d2').innerText = dd[1];
+    document.getElementById('m1').innerText = mm[0];
+    document.getElementById('m2').innerText = mm[1];
+    document.getElementById('y1').innerText = yyyy[0];
+    document.getElementById('y2').innerText = yyyy[1];
+    document.getElementById('y3').innerText = yyyy[2];
+    document.getElementById('y4').innerText = yyyy[3];
+}
+setCurrentDate();
+
+document.getElementById("loanForm").addEventListener("submit", async function(e){
+    e.preventDefault(); 
+
+    const agreement = document.querySelector('input[name="agreement"]:checked').value;
+    if(agreement === "disagree"){
+        alert("ဝန်ခံကတိပြုချက်ကို သဘောတူမှသာ လျှောက်လွှာတင်နိုင်ပါသည်။");
+        return;
+    }
+
+    const checkboxes = document.querySelectorAll('.dec-check');
+    let allChecked = true;
+    checkboxes.forEach(function(cb) {
+        if(!cb.checked) allChecked = false;
+    });
+
+    if(!allChecked) {
+        alert("ဝန်ခံကတိပြုချက် အချက်အားလုံးကို checkbox အမှန်ခြစ်ပေးရန် လိုအပ်ပါသည်။");
+        return;
+    }
+
+    const submitBtn = document.querySelector(".submit-btn");
+    submitBtn.disabled = true;
+    submitBtn.innerText = "Processing Workflow...";
+
+    // Capture explicit text box configurations formatted for automation flow execution
+    const payload = {
+        staffId: document.getElementById("staffId").value,
+        staffName: document.getElementById("staffName").value,
+        staffEmail: document.getElementById("staffEmail").value,
+        position: document.getElementById("staffPosition").value,
+        department: document.getElementById("department").value,
+        nrc: document.getElementById("nrc").value,
+        fatherName: document.getElementById("fatherName").value,
+        fatherNRC: document.getElementById("fatherNRC").value,
+        address: document.getElementById("address").value,
+        phone: document.getElementById("phone").value,
+        salary: Number(document.getElementById("salary").value),
+        loanType: document.querySelector('input[name="loanType"]:checked').value,
+        loanAmount: Number(document.getElementById("loanAmount").value),
+        salaryMultiple: document.querySelector('input[name="salaryMultiple"]:checked').value,
+        accountNo: document.getElementById("accountNo").value,
+        guarantor1Name: document.getElementById("guarantor1Name").value,
+        guarantor1Email: document.getElementById("guarantor1Email").value,
+        guarantor1Position: document.getElementById("guarantor1Position").value,
+        guarantor2Name: document.getElementById("guarantor2Name").value,
+        guarantor2Email: document.getElementById("guarantor2Email").value,
+        guarantor2Position: document.getElementById("guarantor2Position").value,
+        hodName: document.getElementById("hodName").value,
+        hodEmail: document.getElementById("hodEmail").value,
+        submissionDate: `${document.getElementById('d1').innerText}${document.getElementById('d2').innerText}/${document.getElementById('m1').innerText}${document.getElementById('m2').innerText}/${document.getElementById('y1').innerText}${document.getElementById('y2').innerText}${document.getElementById('y3').innerText}${document.getElementById('y4').innerText}`
+    };
+
+    const powerAutomateUrl = "https://fee5717819c7ee39be9bafcfc086ab.94.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/14/workflows/160849fd0ed34ad3b4323350c82fa1fa/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=K8Nnl_v3BB2rhFv78-_7yHM_IN6LqZyvmeO3xPkQp7s";
+
+    try {
+        let flowOk = false;
+
+        if (powerAutomateUrl) {
+            try {
+                const flowResponse = await fetch(powerAutomateUrl, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+                flowOk = flowResponse.ok;
+            } catch (flowError) {
+                console.warn("Power Automate flow warning:", flowError);
+            }
+        }
+
+        try {
+            const dbResponse = await fetch("/api/submit-loan", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await dbResponse.json().catch(() => ({}));
+            if (dbResponse.ok) {
+                const applicationId = result.applicationId || result.data?.application_id;
+                if (applicationId) {
+                    window.localStorage.setItem("staffLoanApplicationId", String(applicationId));
+                }
+            }
+        } catch (dbError) {
+            console.warn("Database save warning:", dbError);
+        }
+
+        if (flowOk) {
+            alert("လျှောက်လွှာတင်ခြင်း အောင်မြင်ပါသည်။\n\nPower Automate flow started successfully and DB save was attempted afterward.");
+        } else {
+            alert("Power Automate flow could not be reached, but the form data was still sent to the local backend.");
+        }
+
+        document.getElementById("loanForm").reset(); 
+        setCurrentDate(); 
+    } catch (error) {
+        console.error("Loan submission error:", error);
+        alert("Loan form submission failed. Please check your configuration.");
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Submit";
+    }
+});
+</script>
+
+</body>
+</html>
