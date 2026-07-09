@@ -1,3 +1,4 @@
+from numbers import Number
 import os
 from datetime import datetime
 from typing import Any, Dict
@@ -7,11 +8,12 @@ from flask import Flask, jsonify, render_template, request
 from dotenv import load_dotenv
 from supabase import Client, create_client
 
-load_dotenv()
+# Load a local .env during development only; Vercel provides envs in production
+load_dotenv(override=False)
 
 # --- Supabase client setup ---
-SUPABASE_URL = os.getenv("SUPABASE_URL", "")
-SUPABASE_KEY = os.getenv("SUPABASE_KEY", "")
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 
 supabase: Client | None = None
 if SUPABASE_URL and SUPABASE_KEY:
@@ -20,7 +22,7 @@ if SUPABASE_URL and SUPABASE_KEY:
 
 def _ensure_client() -> Client:
     if supabase is None:
-        raise RuntimeError("SUPABASE_URL and SUPABASE_KEY must be set in the environment or .env file")
+        raise RuntimeError("SUPABASE_URL and SUPABASE_KEY must be set in the environment")
     return supabase
 
 
@@ -33,18 +35,18 @@ def insert_application(payload: Dict[str, Any]) -> Dict[str, Any]:
         "application_no": payload.get("applicationNo") or payload.get("application_no") or _generate_application_no(),
         "staff_id": payload.get("staffId"),
         "staff_name": payload.get("staffName"),
-        "position_title": payload.get("positionTitle") or payload.get("position"),
-        "department_name": payload.get("departmentName") or payload.get("department"),
-        "nrc_no": payload.get("nrcNo") or payload.get("nrc"),
+        "position_title": payload.get("position"),
+        "department_name": payload.get("department"),
+        "nrc_no": payload.get("nrc"),
         "father_name": payload.get("fatherName"),
-        "father_nrc_no": payload.get("fatherNrcNo") or payload.get("fatherNRC"),
-        "permanent_address": payload.get("permanentAddress") or payload.get("address"),
-        "phone_no": payload.get("phoneNo") or payload.get("phone"),
-        "gross_salary": float(payload.get("grossSalary") or payload.get("salary") or 0),
-        "loan_type": payload.get("loanType") or "Staff Loan",
-        "loan_amount": float(payload.get("loanAmount") or 0),
+        "father_nrc_no": payload.get("fatherNRC"),
+        "permanent_address": payload.get("address"),
+        "phone_no": payload.get("phone"),
+        "gross_salary": Number(payload.get("salary")),
+        "loan_type": payload.get("loanType"),
+        "loan_amount": Number(payload.get("loanAmount")),
         "salary_multiple": payload.get("salaryMultiple") or 1,
-        "cb_account_no": payload.get("cbAccountNo") or payload.get("accountNo"),
+        "cb_account_no": payload.get("accountNo"),
         "guarantor1_name": payload.get("guarantor1Name"),
         "guarantor1_email": payload.get("guarantor1Email"),
         "guarantor2_name": payload.get("guarantor2Name"),
@@ -133,7 +135,31 @@ app = Flask(__name__)
 
 @app.route('/')
 def index_view():
-    return render_template('Stafform.html')
+    # Try to fetch something from Supabase; if envs missing, show helpful message
+    try:
+        client = _ensure_client()
+    except Exception as exc:
+        return (
+            f"<h1>Configuration error</h1><p>{exc}</p>"
+            "<p>Set SUPABASE_URL and SUPABASE_KEY in environment variables.</p>",
+            500,
+        )
+
+    try:
+        response = client.table('staff_loan_application').select('*').limit(10).execute()
+        records = response.data or []
+    except Exception as db_exc:
+        return (
+            f"<h1>Database error</h1><p>{db_exc}</p>",
+            500,
+        )
+
+    # Simple rendered output for quick verification
+    html = '<h1>Recent Applications</h1><ul>'
+    for r in records:
+        html += f"<li>{r.get('application_no') or r.get('staff_name') or r.get('id')}</li>"
+    html += '</ul>'
+    return html
 
 
 @app.route('/staff-form')
